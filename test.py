@@ -1,10 +1,14 @@
 import pymysql
 import datetime
-
+import json
 import insert
 from connect import get_conn
 
-
+# a = open(r"C:\Users\76138\Desktop\test.json", "r", encoding='utf_8_sig')
+# out = a.read()
+# tmp = json.dumps(out)
+# tmp = json.loads(out)
+# print(tmp)
 insert.insert_sport()
 
 # def Test():

@@ -1,0 +1,16 @@
+﻿[
+  {
+    "User_ID": 111,
+    "Sport_Type": "fwc",
+    "Sport_Number": 88,
+    "Sport_Consume": 123.4,
+    "Propose": "g"
+  },
+  {
+    "User_ID": 222,
+    "Sport_Type": "ytxs",
+    "Sport_Number": 66,
+    "Sport_Consume": 888.8,
+    "Propose": "h"
+  }
+]
