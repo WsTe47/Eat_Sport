@@ -5,17 +5,19 @@ import insert
 from connect import get_conn
 
 
-def Test():
-    conn = get_conn()
-    cur = conn.cursor()  # 生成游标对象
-    sql = 'select * from test '
-    cur.execute(sql)  # 执行SQL语句
-    rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
-    for i in rest:
-      print(i)
-    conn.close()
-Test()
-insert.insert_test()
+insert.insert_sport()
+
+# def Test():
+#     conn = get_conn()
+#     cur = conn.cursor()  # 生成游标对象
+#     sql = 'select * from test '
+#     cur.execute(sql)  # 执行SQL语句
+#     rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
+#     for i in rest:
+#       print(i)
+#     conn.close()
+# Test()
+# insert.insert_test()
 
 
 # # datetime.datetime(2023, 3, 4, 0, 27, 31)       MySQL中的datetime返回为此值    <class 'datetime.datetime'>
