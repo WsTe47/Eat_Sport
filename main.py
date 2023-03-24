@@ -4,7 +4,8 @@ import sport
 import insert
 
 from eat import Get_Day_Eat
-insert.insert_sport()
+a = open(r"sport_test.json", "r", encoding='utf_8_sig')
+insert.insert_sport(a)
 
 
 # id = 1

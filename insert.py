@@ -3,11 +3,10 @@ import json
 from connect import get_conn
 
 
-def insert_sport():
+def insert_sport(s):
     conn = get_conn()
     cur = conn.cursor()  # 生成游标对象
-    a = open(r"test.json", "r", encoding='utf_8_sig')
-    out = a.read()
+    out = s.read()
     tmp = json.loads(out)
     for i in range(len(tmp)):
         User_ID = tmp[i]['User_ID']
@@ -21,7 +20,7 @@ def insert_sport():
         #              "values ('d','%s','s','d','f','s')" ,value
         sql_insert = "insert into sport (User_ID,Date,Sport_Type,Sport_Number,Sport_Consume,Propose)" \
                      "values ('%d','%s','%s','%d','%f','%s')" % (
-              User_ID, dt, Sport_Type, Sport_Number, Sport_Consume,  Propose)
+                         User_ID, dt, Sport_Type, Sport_Number, Sport_Consume, Propose)
         result = cur.execute(sql_insert)  # 执行上述sql命令
         print(result)
 
@@ -30,32 +29,37 @@ def insert_sport():
     conn.close()  # 关闭连接
 
 
-# 这个版本的insert  可以插入测试数据，接下来编写可以传入数据的插入
-def insert_sport_testNumber():
+# f是传来的json，里面包含ID，Food_Name、Height
+def insert_food_nutrition(Food_Name, Height):
     conn = get_conn()
     cur = conn.cursor()  # 生成游标对象
-    t = datetime.datetime.now()
-    dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    sql = "insert into sport (User_ID,Date,Sport_Type,Sport_Number,Sport_Consume,Propose)" \
-          "values ('%d','%s','%s','%d','%f','%s')" % (
-              555, dt, "test", 2, 2.5, "testtt")
-    sql1 = "insert into sport(User_ID,Date)values('%s')" % (dt)
-    result = cur.execute(sql)  # 执行SQL语句
-    print(result)
-    conn.commit()  # 提交推送
-    cur.close()  # 关闭游标
-    conn.close()  # 关闭连接
+    sql = "select * from nurtition WHERE Food_Name=(%s) and Height=(%f) " % (Food_Name, Height)
+    cur.execute(sql)  # 执行SQL语句
+    rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
+    s = []
+    for i in rest:
+        s += [i]
+    conn.close()
+    return s
 
 
-# 测试一下是否可以插入时间
-def insert_test():
+def insert_food(f):
     conn = get_conn()
     cur = conn.cursor()  # 生成游标对象
-    t = datetime.datetime.now()
-    dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    sql1 = "insert into test(time)values('%s')" % (dt)
-    result = cur.execute(sql1)  # 执行SQL语句
-    print(result)
+    out = f.read()
+    tmp = json.loads(out)
+    for i in range(len(tmp)):
+        User_ID = tmp[i]['User_ID']
+        dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        Food_Name = tmp[i]['Food_Name']
+        Height = tmp[i]['Height']
+        s = insert_food_nutrition(Food_Name, Height)
+        sql_insert = "insert into sport (User_ID,Date,Food_Name,Height)" \
+                     "values ('%d','%s','%s','%f')" % (
+                         User_ID, dt, Food_Name, Height)
+        result = cur.execute(sql_insert)  # 执行上述sql命令
+        print(result)
+
     conn.commit()  # 提交推送
     cur.close()  # 关闭游标
     conn.close()  # 关闭连接

@@ -18,7 +18,7 @@ def Get_Day_Eat(id, date):
 
 # 查询某一日的饮食摄入卡路里
 def Get_Day_Eat_cal(id, date):
-    cal = 0
+    cal =0
     for i in Get_Day_Eat(id, date):
         cal += i[4]
     return cal

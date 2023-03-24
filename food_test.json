@@ -1,0 +1,12 @@
+﻿[
+  {
+    "User_ID": 111,
+    "Food_Name": "KFC",
+    "Height": 88
+  },
+  {
+    "User_ID": 222,
+    "Food_Name": "MDL",
+    "Height": 66
+  }
+]

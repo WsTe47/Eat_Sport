@@ -4,12 +4,15 @@ import json
 import insert
 from connect import get_conn
 
-# a = open(r"C:\Users\76138\Desktop\test.json", "r", encoding='utf_8_sig')
+a = open(r"sport_test.json", "r", encoding='utf_8_sig')
+print(type(insert.insert_food_nutrition("KFC", 1.1)))
+
+# a = open(r"C:\Users\76138\Desktop\sport_test.json", "r", encoding='utf_8_sig')
 # out = a.read()
 # tmp = json.dumps(out)
 # tmp = json.loads(out)
 # print(tmp)
-insert.insert_sport()
+# insert.insert_sport()
 
 # def Test():
 #     conn = get_conn()
