@@ -1,11 +1,17 @@
 import pymysql
 import datetime
+import eat
 import json
 import insert
 from connect import get_conn
+# a=datetime.datetime.now()
+# print(eat.Get_Day_Eat_cal(2,a))
 
-a = open(r"sport_test.json", "r", encoding='utf_8_sig')
-print(type(insert.insert_food_nutrition("KFC", 1.1)))
+# print(insert.insert_food_nutrition('KFC', 1.1)[0])
+
+a = open(r"food_test.json", "r", encoding='utf_8_sig')
+insert.insert_food(a)
+
 
 # a = open(r"C:\Users\76138\Desktop\sport_test.json", "r", encoding='utf_8_sig')
 # out = a.read()

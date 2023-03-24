@@ -5,7 +5,7 @@ from connect import get_conn
 def Get_Day_Eat(id, date):
     conn = get_conn()
     cur = conn.cursor()  # 生成游标对象
-    sql = 'select * from eat WHERE User_ID=%s' % id
+    sql = 'select * from eat WHERE User_ID=%d' % id
     cur.execute(sql)  # 执行SQL语句
     rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
     s = []

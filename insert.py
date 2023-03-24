@@ -30,17 +30,15 @@ def insert_sport(s):
 
 
 # f是传来的json，里面包含ID，Food_Name、Height
-def insert_food_nutrition(Food_Name, Height):
+def insert_food_nutrition(name, Height):
     conn = get_conn()
     cur = conn.cursor()  # 生成游标对象
-    sql = "select * from nurtition WHERE Food_Name=(%s) and Height=(%f) " % (Food_Name, Height)
+    sql = r'''select * from nurtition where Food_Name='%s' ''' % name  # 此语句正确，Unknown column问题消失！
+
     cur.execute(sql)  # 执行SQL语句
-    rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
-    s = []
-    for i in rest:
-        s += [i]
-    conn.close()
-    return s
+    rest = cur.fetchone()  # 这是获取表中全部数据，fetchall和fetchone
+
+    return rest
 
 
 def insert_food(f):
@@ -54,9 +52,15 @@ def insert_food(f):
         Food_Name = tmp[i]['Food_Name']
         Height = tmp[i]['Height']
         s = insert_food_nutrition(Food_Name, Height)
-        sql_insert = "insert into sport (User_ID,Date,Food_Name,Height)" \
-                     "values ('%d','%s','%s','%f')" % (
-                         User_ID, dt, Food_Name, Height)
+        # 0 1 2 3 4
+        # ('KFC', 123.0, 321.0, 456.0, 654.0)
+        Calorie=s[1]*Height
+        Protein=s[2]*Height
+        Fat=s[3]*Height
+        CHO=s[4]*Height
+        sql_insert = "insert into eat (User_ID,Date,Food_Name,Height,Calorie,Protein,Fat,CHO)" \
+                     "values ('%d','%s','%s','%f','%f','%f','%f','%f')" % (
+                         User_ID, dt, Food_Name, Height,Calorie,Protein,Fat,CHO)
         result = cur.execute(sql_insert)  # 执行上述sql命令
         print(result)
 
