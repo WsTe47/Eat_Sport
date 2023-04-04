@@ -24,7 +24,7 @@ def Get_Day_Sport_cal(id, date):
     return cal
 
 
-# 查询某一日的饮食种类
+# 查询某一日的运动种类
 def Get_Day_Sport_type(id, date):
     t = []
     for i in Get_Day_Sport(id, date):
