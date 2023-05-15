@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import pymysql
 import logging
 def get_conn():
@@ -31,16 +31,16 @@ if __name__ == "__main__":
             s += [i]
         conn.close()
         return s
-    @app.route('/Get_Food_ID', methods=['GET', 'POST'])
+    @app.route('/Get_Food_ID/<food_id>', methods=['GET', 'POST'])
     def Get_Food_ID(food_id):
         conn = get_conn()
-        cur = conn.cursor()  # 生成游标对象
-        sql = 'select * from nurtition WHERE Food_ID=%d' % food_id
+        cur = conn.cursor(pymysql.cursors.DictCursor)  # 生成游标对象
+        sql = 'select * from nurtition WHERE Food_ID=%d' % int(food_id)
         cur.execute(sql)  # 执行SQL语句
-        rest = cur.fetchall()  # 这是获取表中全部数据，fetchall和fetchone
+        rest = cur.fetchone()  # 这是获取表中全部数据，fetchall和fetchone
 
         conn.close()
-        return rest
+        return jsonify(rest)
 
 
     # 查询某一日的饮食(被之后函数调用）
